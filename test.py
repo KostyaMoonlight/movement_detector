@@ -14,5 +14,5 @@ def save_frame():
 
 
 if __name__=='__main__':
-    detector = Detector("D:\\code\\m-detectors\\test-videos\\test4.mp4")
+    detector = Detector(0, True)
     detector.detect(save_frame())
