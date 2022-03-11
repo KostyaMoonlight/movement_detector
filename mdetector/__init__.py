@@ -1,0 +1,1 @@
+from mdetector.detector import Detector
