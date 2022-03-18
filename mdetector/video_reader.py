@@ -35,8 +35,8 @@ class VideoReader:
         return cv2.GaussianBlur(gray, (21, 21), 0) 
             
     def _setup_capture(self, source):
-        capture = cv2.VideoCapture(5)
-        capture.release()
+        # capture = cv2.VideoCapture(5)
+        # capture.release()
         return cv2.VideoCapture(source)
     
     def _setup_roi(self, scale_percent):
@@ -45,8 +45,12 @@ class VideoReader:
         height = int(frame.shape[0] * scale_percent)
         dim = (width, height)
         mini_frame = cv2.resize(frame, dim, interpolation=cv2.INTER_AREA)
-        roi = cv2.selectROI(mini_frame)
-        cv2.destroyAllWindows()  
+        roi = cv2.selectROI('select_roi', mini_frame)
+        cv2.waitKey(0)
+        cv2.destroyWindow('select_roi')
+        cv2.destroyAllWindows() 
+        cv2.waitKey(1)
+        
         try:
             self.capture.set(cv2.CAP_PROP_POS_FRAMES, 0)
         except:
