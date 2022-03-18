@@ -14,11 +14,12 @@ class VideoReader:
             ret, frame = self.capture.read()
             if not ret: 
                 no_frame+=1
+                yield None, None, None
                 continue
             no_frame=0
             transformed_frame = self._transform(frame)
             roi_frame=self._apply_roi(transformed_frame) if self.roi else transformed_frame
-            yield frame, roi_frame
+            yield frame, roi_frame, [True]
             
     def _apply_roi(self, frame):
         mask_i = np.s_[int(self.roi[1]):int(self.roi[1]+self.roi[3]), int(self.roi[0]):int(self.roi[0]+self.roi[2])]
